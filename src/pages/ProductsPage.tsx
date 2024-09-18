@@ -61,8 +61,11 @@ const AllProducts = () => {
               </a>{" "}
               <br />
               Or send an inquiry to{" "}
-              <a href="mailto:email@email.com" className="text-cblue font-bold">
-                email@email.com
+              <a
+                href="mailto:contact@sdsmea.com"
+                className="text-cblue font-bold"
+              >
+                contact@sdsmea.com
               </a>
             </h1>
             <div className="w-full flex items-center justify-center flex-col gap-4">
@@ -80,7 +83,7 @@ const AllProducts = () => {
             style={{
               backgroundImage: `url(/products/category/plate_mounting_tape.jpg)`,
               backgroundSize: "cover",
-              backgroundPosition: "bottom"
+              backgroundPosition: "bottom",
             }}
           ></div>
         </div>
@@ -97,7 +100,7 @@ const AllProducts = () => {
               className="w-10 h-0.5"
               style={{
                 backgroundImage:
-                  "linear-gradient(to right, #00aeef, #00aeef 25%, #000000 25%, #000000 50%, #fff202 50%, #fff202 75%, #ec0c8c 75%, #ec0c8c 100%)"
+                  "linear-gradient(to right, #00aeef, #00aeef 25%, #000000 25%, #000000 50%, #fff202 50%, #fff202 75%, #ec0c8c 75%, #ec0c8c 100%)",
               }}
             />
           </div>
@@ -124,7 +127,7 @@ const AllProducts = () => {
               className="w-10 h-0.5"
               style={{
                 backgroundImage:
-                  "linear-gradient(to right, #00aeef, #00aeef 25%, #000000 25%, #000000 50%, #fff202 50%, #fff202 75%, #ec0c8c 75%, #ec0c8c 100%)"
+                  "linear-gradient(to right, #00aeef, #00aeef 25%, #000000 25%, #000000 50%, #fff202 50%, #fff202 75%, #ec0c8c 75%, #ec0c8c 100%)",
               }}
             />
           </div>
