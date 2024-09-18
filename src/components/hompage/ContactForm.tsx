@@ -30,7 +30,7 @@ const ContactForm: React.FC = () => {
               </h2>
               <a
                 className="text-red-500 leading-relaxed"
-                href="mailto:sds@email.com"
+                href="mailto:contact@sdsmea.com"
               >
                 contact@sdsmea.com
               </a>
@@ -38,7 +38,7 @@ const ContactForm: React.FC = () => {
                 PHONE
               </h2>
               <a
-                href="tel:123-456-7890"
+                href="tel:+971585321455"
                 className="text-red-500 leading-relaxed"
               >
                 +971585321455
