@@ -7,7 +7,7 @@ const ContactUsForm = () => {
     user_name: "",
     user_email: "",
     subject: "",
-    message: ""
+    message: "",
   });
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -15,7 +15,7 @@ const ContactUsForm = () => {
     user_name: false,
     user_email: false,
     subject: false,
-    message: false
+    message: false,
   });
 
   const handleChange = (
@@ -31,28 +31,31 @@ const ContactUsForm = () => {
     return re.test(String(email).toLowerCase());
   };
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const validateForm = () => {
     const newErrors = {
       user_name: !formData.user_name,
       user_email: !formData.user_email || !validateEmail(formData.user_email),
       subject: !formData.subject,
-      message: !formData.message
+      message: !formData.message,
     };
+    setErrors(newErrors);
+    return !Object.values(newErrors).some((error) => error);
+  };
 
-    if (Object.values(newErrors).some((error) => error)) {
-      setErrors(newErrors);
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
       setErrorMessage("Please fill in all fields correctly.");
       return;
     }
 
     emailjs
       .sendForm(
-        "service_4xy71nc",
-        "template_x19qf6j",
+        "service_a3tmz66", // Replace with your actual Service ID
+        "template_x19qf6j", // Replace with your actual Template ID
         form.current as HTMLFormElement,
-        "5n9tfWh6PUyAN6F0_"
+        "5n9tfWh6PUyAN6F0_" // Replace with your actual Public Key
       )
       .then(
         () => {
@@ -65,7 +68,7 @@ const ContactUsForm = () => {
             user_name: "",
             user_email: "",
             subject: "",
-            message: ""
+            message: "",
           });
         },
         (error) => {
