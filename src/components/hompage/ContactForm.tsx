@@ -30,9 +30,9 @@ const ContactForm: React.FC = () => {
               </h2>
               <a
                 className="text-red-500 leading-relaxed"
-                href="mailto:contact@sdsmea.com"
+                href="mailto:purchase@sdsmea.com"
               >
-                contact@sdsmea.com
+                purchase@sdsmea.com
               </a>
               <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">
                 PHONE

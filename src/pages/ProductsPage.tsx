@@ -62,10 +62,10 @@ const AllProducts = () => {
               <br />
               Or send an inquiry to{" "}
               <a
-                href="mailto:contact@sdsmea.com"
+                href="mailto:purchase@sdsmea.com"
                 className="text-cblue font-bold"
               >
-                contact@sdsmea.com
+                purchase@sdsmea.com
               </a>
             </h1>
             <div className="w-full flex items-center justify-center flex-col gap-4">
