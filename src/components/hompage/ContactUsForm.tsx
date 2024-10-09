@@ -1,5 +1,6 @@
 import emailjs from "@emailjs/browser";
 import React, { useRef, useState } from "react";
+console.log("hi");
 
 const ContactUsForm = () => {
   const form = useRef<HTMLFormElement | null>(null);
@@ -9,6 +10,7 @@ const ContactUsForm = () => {
     subject: "",
     message: "",
   });
+  console.log("hi");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [errors, setErrors] = useState({
@@ -33,6 +35,7 @@ const ContactUsForm = () => {
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    alert("Send button clicked"); // Debugging step to verify if the function is triggered
 
     const newErrors = {
       user_name: !formData.user_name,
@@ -44,15 +47,17 @@ const ContactUsForm = () => {
     if (Object.values(newErrors).some((error) => error)) {
       setErrors(newErrors);
       setErrorMessage("Please fill in all fields correctly.");
+      console.log("Validation errors:", newErrors);
       return;
     }
 
+    console.log("Sending email with data:", formData);
     emailjs
       .sendForm(
-        "service_4xy71nc", // Your actual service ID
-        "template_x19qf6j", // Your actual template ID
+        "service_4xy71nc",
+        "template_x19qf6j",
         form.current as HTMLFormElement,
-        "5n9tfWh6PUyAN6F0_" // Your actual public key
+        "5n9tfWh6PUyAN6F0_"
       )
       .then(
         () => {
@@ -60,6 +65,8 @@ const ContactUsForm = () => {
             "Thank you for your reach. We'll get back to you soon."
           );
           setErrorMessage(null);
+          console.log("Email sent successfully");
+
           // Clear form after submission
           setFormData({
             user_name: "",
@@ -69,7 +76,7 @@ const ContactUsForm = () => {
           });
         },
         (error) => {
-          console.error("FAILED...", error.text);
+          console.error("Email send failed:", error.text);
           setStatusMessage(null);
           setErrorMessage(
             "Failed to send the message. Please try again later."

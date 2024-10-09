@@ -1,6 +1,42 @@
+import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import { BsSend } from "react-icons/bs";
 
 const ContactForm: React.FC = () => {
+  const form = useRef<HTMLFormElement | null>(null);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (form.current) {
+      emailjs
+        .sendForm(
+          "service_a3tmz66", // Replace with your EmailJS service ID
+          "template_x19qf6j", // Replace with your EmailJS template ID
+          form.current,
+          "5n9tfWh6PUyAN6F0_" // Replace with your EmailJS public key
+        )
+        .then(
+          () => {
+            setStatusMessage(
+              "Thank you for your message! We'll get back to you soon."
+            );
+            setErrorMessage(null);
+            form.current?.reset(); // Clear the form fields
+          },
+          (error) => {
+            console.error("Email send failed:", error.text);
+            setErrorMessage(
+              "Failed to send the message. Please try again later."
+            );
+            setStatusMessage(null);
+          }
+        );
+    }
+  };
+
   return (
     <section className="text-gray-600 body-font relative max-w-7xl">
       <div className="container px-5 mx-auto flex sm:flex-nowrap flex-wrap">
@@ -54,45 +90,75 @@ const ContactForm: React.FC = () => {
             Get in touch with us for any inquiries, support, or feedback — we're
             here to help!
           </p>
-          <div className="relative mb-4">
-            <label htmlFor="name" className="leading-7 text-sm text-gray-600">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="w-full bg-white rounded border border-gray-300 focus:border-cblue focus:ring-2 focus:ring-cblue text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
-          </div>
-          <div className="relative mb-4">
-            <label htmlFor="email" className="leading-7 text-sm text-gray-600">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full bg-white rounded border border-gray-300 focus:border-cblue focus:ring-2 focus:ring-cblue text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
-          </div>
-          <div className="relative mb-4">
-            <label
-              htmlFor="message"
-              className="leading-7 text-sm text-gray-600"
+          <form ref={form} onSubmit={sendEmail}>
+            <div className="relative mb-4">
+              <label htmlFor="name" className="leading-7 text-sm text-gray-600">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="user_name" // Make sure this matches your template variable
+                className="w-full bg-white rounded border border-gray-300 focus:border-cblue focus:ring-2 focus:ring-cblue text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                required
+              />
+            </div>
+            <div className="relative mb-4">
+              <label
+                htmlFor="email"
+                className="leading-7 text-sm text-gray-600"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="user_email" // Make sure this matches your template variable
+                className="w-full bg-white rounded border border-gray-300 focus:border-cblue focus:ring-2 focus:ring-cblue text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                required
+              />
+            </div>
+            <div className="relative mb-4">
+              <label
+                htmlFor="subject"
+                className="leading-7 text-sm text-gray-600"
+              >
+                Subject
+              </label>
+              <input
+                type="text"
+                id="subject"
+                name="subject" // Make sure this matches your template variable
+                className="w-full bg-white rounded border border-gray-300 focus:border-cblue focus:ring-2 focus:ring-cblue text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                required
+              />
+            </div>
+            <div className="relative mb-4">
+              <label
+                htmlFor="message"
+                className="leading-7 text-sm text-gray-600"
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message" // Make sure this matches your template variable
+                className="w-full bg-white rounded border border-gray-300 focus:border-cblue focus:ring-2 focus:ring-cblue h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="inline-flex items-center justify-center text-white bg-cpink border-0 py-2 px-6 focus:outline-none hover:bg-cpink/80 rounded text-lg transition-colors"
             >
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              className="w-full bg-white rounded border border-gray-300 focus:border-cblue focus:ring-2 focus:ring-cblue h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-            ></textarea>
-          </div>
-          <button className=" inline-flex items-center justify-center text-white bg-cpink border-0 py-2 px-6 focus:outline-none hover:bg-cpink/80 rounded text-lg transition-colors">
-            Send
-            <BsSend className="inline-block ml-3" />
-          </button>
+              Send
+              <BsSend className="inline-block ml-3" />
+            </button>
+          </form>
+          {statusMessage && (
+            <p className="text-green-600 mt-4">{statusMessage}</p>
+          )}
+          {errorMessage && <p className="text-red-600 mt-4">{errorMessage}</p>}
           <p className="text-xs text-gray-500 mt-3">
             By submitting this form I confirm that I agree with the privacy
             policy.
