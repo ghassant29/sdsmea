@@ -31,31 +31,28 @@ const ContactUsForm = () => {
     return re.test(String(email).toLowerCase());
   };
 
-  const validateForm = () => {
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const newErrors = {
       user_name: !formData.user_name,
       user_email: !formData.user_email || !validateEmail(formData.user_email),
       subject: !formData.subject,
       message: !formData.message,
     };
-    setErrors(newErrors);
-    return !Object.values(newErrors).some((error) => error);
-  };
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
+    if (Object.values(newErrors).some((error) => error)) {
+      setErrors(newErrors);
       setErrorMessage("Please fill in all fields correctly.");
       return;
     }
 
     emailjs
       .sendForm(
-        "service_a3tmz66", // Replace with your actual Service ID
-        "template_x19qf6j", // Replace with your actual Template ID
+        "service_4xy71nc", // Your actual service ID
+        "template_x19qf6j", // Your actual template ID
         form.current as HTMLFormElement,
-        "5n9tfWh6PUyAN6F0_" // Replace with your actual Public Key
+        "5n9tfWh6PUyAN6F0_" // Your actual public key
       )
       .then(
         () => {
