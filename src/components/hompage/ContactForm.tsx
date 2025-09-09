@@ -74,10 +74,10 @@ const ContactForm: React.FC = () => {
                 PHONE
               </h2>
               <a
-                href="tel:+971585321455"
+                href="tel:+971 52 296 7323"
                 className="text-red-500 leading-relaxed"
               >
-                +971585321455
+                +971 52 296 7323
               </a>
             </div>
           </div>
