@@ -56,8 +56,8 @@ const AllProducts = () => {
               with any questions or special requirements you may have. <br />
               <br />
               Feel free to call us at{" "}
-              <a href="tel:+971 52 296 7323" className="text-cblue font-bold">
-                +971 52 296 7323
+              <a href="tel:+971522967323" className="text-cblue font-bold">
+                +971522967323
               </a>{" "}
               <br />
               Or send an inquiry to{" "}
